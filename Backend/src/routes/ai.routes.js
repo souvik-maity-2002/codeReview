@@ -1,10 +1,10 @@
-import express from 'express';
-import { getReview } from '../controllers/ai.controller.js';
-import { generateContent } from '../services/ai.service.js';
+const express = require('express');
+const aiController = require("../controllers/ai.controller")
 
 const router = express.Router();
 
-// Use your controller function
-router.post('/get-review', getReview);
 
-export default router;
+router.post("/get-review", aiController.getReview)
+
+
+module.exports = router;    

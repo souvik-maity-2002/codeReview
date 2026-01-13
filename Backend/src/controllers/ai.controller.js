@@ -1,17 +1,18 @@
-// src/services/ai.service.js
-import { Client } from '@google/genai';
 
-const client = new Client({ apiKey: process.env.GOOGLE_GEMINI_KEY });
+const aiService = require("../services/ai.service")
 
-export async function generateContent(prompt) {
-  try {
-    const response = await client.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-    });
-    return response.text;
-  } catch (error) {
-    console.error('Error generating content:', error);
-    return null;
-  }
+
+module.exports.getReview = async (req, res) => {
+
+    const code = req.body.code;
+
+    if (!code) {
+        return res.status(400).send("Prompt is required");
+    }
+
+    const response = await aiService(code);
+
+
+    res.send(response);
+
 }

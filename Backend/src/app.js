@@ -1,15 +1,18 @@
-// src/app.js
-import express from 'express';
-import aiRoutes from './routes/ai.routes.js'; // ✅ Add .js extension
+const express = require('express');
+const aiRoutes = require('./routes/ai.routes')
+const cors = require('cors')
 
-const app = express();
+const app = express()
 
-app.use(express.json()); // ✅ Middleware for JSON body parsing
+app.use(cors())
+
+
+app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello world');
-});
+    res.send('Hello World')
+})
 
-app.use('/ai', aiRoutes);
+app.use('/ai', aiRoutes)
 
-export default app; // ✅ ESM export
+module.exports = app
